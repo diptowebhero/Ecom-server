@@ -9,11 +9,11 @@ const createProduct = async (req, res, next) => {
         const {name} = req.fields
         const {photo} = req.files;
 
-        // if (photo && photo.size > 1000000) {
-        //     return res.json({
-        //         err: "Image should be less than 1mb in size"
-        //     })
-        // }
+        if (photo && photo.size > 1000000) {
+            return res.json({
+                err: "Image should be less than 1mb in size"
+            })
+        }
 
         const newProduct = new Product({...req.fields, slug: slugify(name)});
 
